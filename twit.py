@@ -8,7 +8,7 @@ access_file='twitter.access'
 def __load_auth(file):
     if os.path.exists(file):
         with open(file) as f:
-            tokens = f.readline().split(':')
+            tokens = f.readline().replace('\n','').replace('\r','').split(':')
         if len(tokens) == 2:
             return tokens[0],tokens[1]
         else:
