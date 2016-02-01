@@ -27,8 +27,14 @@ def twit(message, secret_dir='/secret'):
     auth.set_access_token(access_token, access_secret)
     #
     # Create the API and post the status update
-    api = tweepy.API(auth)
-    api.update_status(message)
+    try: 
+        api = tweepy.API(auth)
+        api.update_status(message)
+    except TweepError:
+        print "Failed to post status update"
+        print "Using:"
+        print "  consumer[%s][%s]" % (consumer_token, consumer_secret)
+        print "  access[%s][%s]" % (access_token, access_secret)
 
 if __name__ == '__main__':
     tokens = sys.argv[1:]
