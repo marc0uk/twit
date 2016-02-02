@@ -30,8 +30,9 @@ def twit(message, secret_dir='/secret'):
     try: 
         api = tweepy.API(auth)
         api.update_status(message)
-    except tweepy.error.TweepError:
+    except tweepy.error.TweepError, e:
         print "Failed to post status update"
+        print "Error: %s" % str(e)
         print "Using:"
         print "  consumer[%s][%s]" % (consumer_token, consumer_secret)
         print "  access[%s][%s]" % (access_token, access_secret)
